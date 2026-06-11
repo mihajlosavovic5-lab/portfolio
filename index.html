@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- SEO -->
+    <meta name="description"
+        content="Mihajlo Savović — web developer from Serbia. I build modern, responsive websites using HTML, CSS and JavaScript.">
+    <meta name="keywords" content="web developer, Serbia, Kragujevac, HTML, CSS, JavaScript, portfolio">
+    <meta name="author" content="Mihajlo Savović">
+
+    <!-- Open Graph (lepši prikaz na društvenim mrežama) -->
+    <meta property="og:title" content="Mihajlo Savović — Web Developer">
+    <meta property="og:description" content="I build modern, responsive websites using HTML, CSS and JavaScript.">
+    <meta property="og:image" content="slika.jpg">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mihajlosavovic.com">
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <title>Mihajlo Savović — Web Developer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+
+<body>
+    <div id="bg-slika"></div>
+    <div id="bg-overlay"></div>
+    <div id="preloader">
+        <div class="preloader-inner">
+            <svg class="preloader-ring" viewBox="0 0 120 120">
+                <circle class="track" cx="60" cy="60" r="54" />
+                <circle class="spin" cx="60" cy="60" r="54" />
+            </svg>
+            <div class="loader-tekst">MS</div>
+        </div>
+    </div>
+
+    <button id="hamburger">&#9776;</button>
+    <div id="menu-overlay"></div>
+    <div id="toast">✅ Message sent!</div>
+    <button id="back-to-top">↑</button>
+
+    <div id="scroll-container">
+        <div class="progress-bar"></div>
+        <div class="wrapper">
+        <nav>
+            <a href="#o-meni" class="aktivna">About me</a>
+            <a href="#projekti">Projects</a>
+            <a href="#kontakt">Contact</a>
+        </nav>
+
+        <section id="o-meni" class="stranica aktivna">
+            <div class="profilna-wrap">
+    <img src="slika.jpg" alt="Slika Mihajla" class="profilna">
+</div>
+            <div class="o-meni-tekst">
+                <p class="pozdrav">Hello!</p>
+                <h1 class="ime">I'm Mihajlo Savović</h1>
+                <div class="socijalne">
+                    <a href="https://github.com/mihajlosavovic5-lab" target="_blank"><i class="fab fa-github"></i></a>
+                </div>
+                <p class="podnaslov web-dev"><span id="typewriter"></span></p>
+            <p class="o-meni-bio">I'm a 20-year-old self-taught frontend developer from Kragujevac, Serbia. With a background in IT high school and years of independent learning alongside formal education, I've built a solid foundation in modern web development.<br><br>I'm drawn to frontend because I love the creative side of coding — turning ideas into visual, interactive experiences. Every project is a chance to combine logic with design.<br><br>Currently planning to continue my education at university, while actively expanding my skills and working on real-world projects.</p>
+                <button id="kontakt-dugme" class="glavno-dugme">Contact me</button>
+            </div>
+        </section>
+
+        <section id="projekti" class="stranica">
+            <h2>My Projects</h2>
+            <p class="podnaslov">Projects I've worked on</p>
+            <div class="counteri">
+                <div class="counter-item">
+                    <span class="counter" data-cilj="1">0</span>
+                    <p>Projects</p>
+                </div>
+                <div class="counter-item">
+                    <span class="counter" data-cilj="3">0</span>
+                    <p>Years of learning</p>
+                </div>
+                <div class="counter-item">
+                    <span class="counter" data-cilj="500" data-plus="true">0</span>
+                    <p>Hours coding</p>
+                </div>
+            </div>
+            <div class="projekti-grid">
+                <div class="kartica">
+                    <img src="prviprojekat.png" alt="Portfolio sajt screenshot" class="kartica-slika">
+                    <h3>Portfolio website</h3>
+                    <p>Personal portfolio site built from scratch. Responsive design, animations, JavaScript interactivity.</p>
+                    <div class="tehnologije">
+                        <span>HTML</span>
+                        <span>CSS</span>
+                        <span>JavaScript</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="kontakt" class="stranica">
+            <div class="kontakt-grid">
+                <div class="kontakt-info">
+                    <h2>Contact</h2>
+                    <h3>Information</h3>
+                    <p>📍 Kragujevac, Serbia</p>
+                    <p>📧 mihajlosavovic5@gmail.com</p>
+                    <p>📞 +381 64 932 7724</p>
+                    <a href="tel:+381649327724"><button>Call me</button></a>
+                </div>
+
+                <div class="kontakt-forma">
+                    <div class="input-grupa">
+                        <input type="text" id="ime-input" placeholder=" ">
+                        <label for="ime-input">Your name</label>
+                    </div>
+                    <div class="input-grupa">
+                        <input type="email" id="email-input" placeholder=" ">
+                        <label for="email-input">Your email</label>
+                    </div>
+                    <div class="input-grupa">
+                        <textarea id="poruka-input" placeholder=" " rows="5"></textarea>
+                        <label for="poruka-input">Your message</label>
+                    </div>
+                    <button id="posalji">Send message</button>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>© 2026 Mihajlo Savović. All rights reserved.</p>
+        </footer>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+
+</body>
+
+</html>
