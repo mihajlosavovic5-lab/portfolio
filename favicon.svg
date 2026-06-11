@@ -1,5 +1,12 @@
+<<<<<<< HEAD
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
     <rect width="100" height="100" rx="12" fill="#1a1a2e" />
     <text x="50" y="72" font-family="Ubuntu, sans-serif" font-size="52" font-weight="700" fill="#459ae9"
         text-anchor="middle">MS</text>
+=======
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+    <rect width="100" height="100" rx="12" fill="#1a1a2e" />
+    <text x="50" y="72" font-family="Ubuntu, sans-serif" font-size="52" font-weight="700" fill="#459ae9"
+        text-anchor="middle">MS</text>
+>>>>>>> 534cfc8ce5374451ec6c9ca207e87d069212057f
 </svg>
