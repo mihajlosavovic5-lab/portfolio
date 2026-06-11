@@ -41,97 +41,102 @@
     </div>
 
     <button id="hamburger">&#9776;</button>
+    <button id="lang-toggle"><img id="lang-flag" src="https://flagcdn.com/w40/rs.png" alt="SR" style="width:32px;height:auto;vertical-align:middle;"></button>
     <div id="menu-overlay"></div>
-    <div id="toast">✅ Message sent!</div>
+    <div id="toast" data-i18n="toast">✅ Message sent!</div>
     <button id="back-to-top">↑</button>
 
     <div id="scroll-container">
         <div class="progress-bar"></div>
         <div class="wrapper">
         <nav>
-            <a href="#o-meni" class="aktivna">About me</a>
-            <a href="#projekti">Projects</a>
-            <a href="#kontakt">Contact</a>
+            <a href="#o-meni" class="aktivna" data-i18n="nav_about">About me</a>
+            <a href="#projekti" data-i18n="nav_projects">Projects</a>
+            <a href="#kontakt" data-i18n="nav_contact">Contact</a>
+            <button id="lang-toggle-desktop"><img id="lang-flag-desktop" src="https://flagcdn.com/w40/rs.png" alt="SR" style="width:32px;height:auto;vertical-align:middle;"></button>
         </nav>
 
-        <section id="o-meni" class="stranica aktivna">
+        <section id="o-meni">
             <div class="profilna-wrap">
     <img src="slika.jpg" alt="Slika Mihajla" class="profilna">
 </div>
             <div class="o-meni-tekst">
-                <p class="pozdrav">Hello!</p>
-                <h1 class="ime">I'm Mihajlo Savović</h1>
+                <p class="pozdrav" data-i18n="hello">Hello!</p>
+                <h1 class="ime" data-i18n="ime">I'm Mihajlo Savović</h1>
                 <div class="socijalne">
                     <a href="https://github.com/mihajlosavovic5-lab" target="_blank"><i class="fab fa-github"></i></a>
                 </div>
                 <p class="podnaslov web-dev"><span id="typewriter"></span></p>
-            <p class="o-meni-bio">I'm a 20-year-old self-taught frontend developer from Kragujevac, Serbia. With a background in IT high school and years of independent learning alongside formal education, I've built a solid foundation in modern web development.<br><br>I'm drawn to frontend because I love the creative side of coding — turning ideas into visual, interactive experiences. Every project is a chance to combine logic with design.<br><br>Currently planning to continue my education at university, while actively expanding my skills and working on real-world projects.</p>
-                <button id="kontakt-dugme" class="glavno-dugme">Contact me</button>
+            <p class="o-meni-bio" data-i18n="bio">I'm a 20-year-old self-taught frontend developer from Kragujevac, Serbia. With a background in IT high school and years of independent learning alongside formal education, I've built a solid foundation in modern web development.<br><br>I'm drawn to frontend because I love the creative side of coding — turning ideas into visual, interactive experiences. Every project is a chance to combine logic with design.<br><br>Currently planning to continue my education at university, while actively expanding my skills and working on real-world projects.</p>
+                <button id="kontakt-dugme" class="glavno-dugme" data-i18n="contact_btn">Contact me</button>
             </div>
         </section>
 
-        <section id="projekti" class="stranica">
-            <h2>My Projects</h2>
-            <p class="podnaslov">Projects I've worked on</p>
+        <section id="projekti">
+            <h2 data-i18n="projects_title">My Projects</h2>
+            <p class="podnaslov" data-i18n="projects_sub">Projects I've worked on</p>
             <div class="counteri">
                 <div class="counter-item">
                     <span class="counter" data-cilj="1">0</span>
-                    <p>Projects</p>
+                    <p data-i18n="counter_projects">Projects</p>
                 </div>
                 <div class="counter-item">
                     <span class="counter" data-cilj="3">0</span>
-                    <p>Years of learning</p>
+                    <p data-i18n="counter_years">Years of learning</p>
                 </div>
                 <div class="counter-item">
                     <span class="counter" data-cilj="500" data-plus="true">0</span>
-                    <p>Hours coding</p>
+                    <p data-i18n="counter_hours">Hours coding</p>
                 </div>
             </div>
             <div class="projekti-grid">
                 <div class="kartica">
-                    <img src="prviprojekat.png" alt="Portfolio sajt screenshot" class="kartica-slika">
-                    <h3>Portfolio website</h3>
-                    <p>Personal portfolio site built from scratch. Responsive design, animations, JavaScript interactivity.</p>
+                    <img src="prvi projekat.jpg" alt="Portfolio sajt screenshot" class="kartica-slika">
+                    <h3 data-i18n="card_title">Portfolio website</h3>
+                    <p data-i18n="card_desc">Personal portfolio site built from scratch. Responsive design, animations, JavaScript interactivity.</p>
                     <div class="tehnologije">
                         <span>HTML</span>
                         <span>CSS</span>
                         <span>JavaScript</span>
                     </div>
+                    <a href="https://mihajlosavovic5-lab.github.io/portfolio/" target="_blank">
+                        <button class="kartica-dugme" data-i18n="view_project">View project</button>
+                    </a>
                 </div>
             </div>
         </section>
 
-        <section id="kontakt" class="stranica">
+        <section id="kontakt">
             <div class="kontakt-grid">
                 <div class="kontakt-info">
-                    <h2>Contact</h2>
-                    <h3>Information</h3>
-                    <p>📍 Kragujevac, Serbia</p>
+                    <h2 data-i18n="contact_title">Contact</h2>
+                    <h3 data-i18n="contact_info">Information</h3>
+                    <p data-i18n="lokacija">📍 Kragujevac, Serbia</p>
                     <p>📧 mihajlosavovic5@gmail.com</p>
                     <p>📞 +381 64 932 7724</p>
-                    <a href="tel:+381649327724"><button>Call me</button></a>
+                    <a href="tel:+381649327724"><button data-i18n="call_me">Call me</button></a>
                 </div>
 
                 <div class="kontakt-forma">
                     <div class="input-grupa">
                         <input type="text" id="ime-input" placeholder=" ">
-                        <label for="ime-input">Your name</label>
+                        <label for="ime-input" data-i18n="label_name">Your name</label>
                     </div>
                     <div class="input-grupa">
                         <input type="email" id="email-input" placeholder=" ">
-                        <label for="email-input">Your email</label>
+                        <label for="email-input" data-i18n="label_email">Your email</label>
                     </div>
                     <div class="input-grupa">
                         <textarea id="poruka-input" placeholder=" " rows="5"></textarea>
-                        <label for="poruka-input">Your message</label>
+                        <label for="poruka-input" data-i18n="label_msg">Your message</label>
                     </div>
-                    <button id="posalji">Send message</button>
+                    <button id="posalji" data-i18n="send_btn">Send message</button>
                 </div>
             </div>
         </section>
 
         <footer>
-            <p>© 2026 Mihajlo Savović. All rights reserved.</p>
+            <p data-i18n="footer">© 2026 Mihajlo Savović. All rights reserved.</p>
         </footer>
         </div>
     </div>

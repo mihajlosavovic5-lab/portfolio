@@ -34,31 +34,52 @@
     });
 
     const linkovi = document.querySelectorAll('nav a');
-    const stranice = document.querySelectorAll('.stranica');
+
     linkovi.forEach(function (link) {
         link.addEventListener('click', function (e) {
             e.preventDefault();
             zatvoriMeni();
-            linkovi.forEach(l => l.classList.remove('aktivna'));
-            this.classList.add('aktivna');
-
             const cilj = this.getAttribute('href').replace('#', '');
-
-            stranice.forEach(function (s) {
-                s.classList.remove('aktivna');
-            });
-
             const el = document.getElementById(cilj);
-            el.classList.add('aktivna');
-            document.getElementById('o-meni').classList.add('bez-animacija');
-            scrollEl.scrollTo({ top: 0, behavior: 'smooth' });
-
-            if (cilj === 'projekti') {
-                pokreniCountere();
-                animirajKartice();
-            }
+            scrollEl.scrollTo({ top: el.offsetTop - 20, behavior: 'smooth' });
         });
     });
+
+    const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                linkovi.forEach(l => l.classList.remove('aktivna'));
+                const activeLink = document.querySelector(`nav a[href="#${entry.target.id}"]`);
+                if (activeLink) activeLink.classList.add('aktivna');
+            }
+        });
+    }, { root: scrollEl, threshold: 0.4 });
+
+    document.querySelectorAll('section').forEach(s => sectionObserver.observe(s));
+
+    const scrollEls = [
+        document.querySelector('#projekti h2'),
+        document.querySelector('#projekti .podnaslov'),
+        document.querySelector('#projekti .counteri'),
+        document.querySelector('#projekti .projekti-grid'),
+        document.querySelector('#kontakt h2'),
+        document.querySelector('#kontakt .kontakt-grid'),
+    ].filter(Boolean);
+
+    scrollEls.forEach(el => el.classList.add('scroll-el'));
+
+    const scrollRevealObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, i) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.classList.add('vidljiv');
+                }, i * 80);
+                scrollRevealObserver.unobserve(entry.target);
+            }
+        });
+    }, { root: scrollEl, threshold: 0.15 });
+
+    scrollEls.forEach(el => scrollRevealObserver.observe(el));
 
 
 
@@ -133,20 +154,26 @@
         });
     }
 
-    const tekst = "Web developer from Serbia"
+    let tekst = "Web developer from Serbia";
     const typewriter = document.getElementById('typewriter');
     let i = 0;
+    let typewriterInterval = null;
 
-    setTimeout(() => {
-        const interval = setInterval(() => {
+    function startTypewriter() {
+        if (typewriterInterval) clearInterval(typewriterInterval);
+        typewriter.textContent = '';
+        i = 0;
+        typewriterInterval = setInterval(() => {
             if (i < tekst.length) {
                 typewriter.textContent += tekst[i];
                 i++;
             } else {
-                clearInterval(interval);
+                clearInterval(typewriterInterval);
             }
         }, 35);
-    }, 1600);
+    }
+
+    setTimeout(startTypewriter, 1600);
 
     const bio = document.querySelector('.o-meni-bio');
     const bioObserver = new IntersectionObserver((entries) => {
@@ -159,10 +186,6 @@
 
     function animirajKartice() {
         const kartice = document.querySelectorAll('.kartica');
-        kartice.forEach(kartica => {
-            kartica.classList.remove('vidljiva');
-        });
-
         const observer = new IntersectionObserver((entries) => {
             const vidljive = entries.filter(entry => entry.isIntersecting);
             vidljive.forEach((entry, i) => {
@@ -172,9 +195,18 @@
                 observer.unobserve(entry.target);
             });
         }, { threshold: 0.1, root: scrollEl });
-
         kartice.forEach(kartica => observer.observe(kartica));
     }
+
+    let countersDone = false;
+    const projektiObserver = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && !countersDone) {
+            countersDone = true;
+            pokreniCountere();
+            animirajKartice();
+        }
+    }, { root: scrollEl, threshold: 0.1 });
+    projektiObserver.observe(document.getElementById('projekti'));
 
     function zatvoriMeni() {
         document.querySelector('nav').classList.remove('open');
@@ -195,15 +227,113 @@
 
     document.getElementById('menu-overlay').addEventListener('click', zatvoriMeni);
 
+    const translations = {
+        en: {
+            nav_about: 'About me',
+            nav_projects: 'Projects',
+            nav_contact: 'Contact',
+            hello: 'Hello!',
+            ime: "I'm Mihajlo Savović",
+            typewriter: 'Web developer from Serbia',
+            bio: "I'm a 20-year-old self-taught frontend developer from Kragujevac, Serbia. With a background in IT high school and years of independent learning alongside formal education, I've built a solid foundation in modern web development.<br><br>I'm drawn to frontend because I love the creative side of coding — turning ideas into visual, interactive experiences. Every project is a chance to combine logic with design.<br><br>Currently planning to continue my education at university, while actively expanding my skills and working on real-world projects.",
+            bio: "I'm a 20-year-old self-taught frontend developer from Kragujevac, Serbia. With a background in IT high school and years of independent learning alongside formal education, I've built a solid foundation in modern web development.<br><br>I'm drawn to frontend because I love the creative side of coding — turning ideas into visual, interactive experiences. Every project is a chance to combine logic with design.<br><br>Currently planning to continue my education at university, while actively expanding my skills and working on real-world projects.",
+            contact_btn: 'Contact me',
+            projects_title: 'My Projects',
+            projects_sub: "Projects I've worked on",
+            counter_projects: 'Projects',
+            counter_years: 'Years of learning',
+            counter_hours: 'Hours coding',
+            card_title: 'Portfolio website',
+            card_desc: 'Personal portfolio site built from scratch. Responsive design, animations, JavaScript interactivity.',
+            view_project: 'View project',
+            contact_title: 'Contact',
+            contact_info: 'Information',
+            lokacija: '📍 Kragujevac, Serbia',
+            call_me: 'Call me',
+            label_name: 'Your name',
+            label_email: 'Your email',
+            label_msg: 'Your message',
+            send_btn: 'Send message',
+            footer: '© 2026 Mihajlo Savović. All rights reserved.',
+            toast: '✅ Message sent!',
+        },
+        sr: {
+            nav_about: 'O meni',
+            nav_projects: 'Projekti',
+            nav_contact: 'Kontakt',
+            hello: 'Zdravo!',
+            ime: 'Ja sam Mihajlo Savović',
+            typewriter: 'Web developer iz Srbije',
+
+            bio: 'Imam 20 godina i samouk sam frontend developer iz Kragujevca, Srbije. Sa završenom IT školom i godinama samostalnog učenja uz formalno obrazovanje, izgradio sam solidnu osnovu u modernom web razvoju.<br><br>Privučen sam frontendom jer volim kreativnu stranu kodiranja — pretvaranje ideja u vizuelna, interaktivna iskustva. Svaki projekat je prilika da kombinujem logiku i dizajn.<br><br>Trenutno planiram nastavak školovanja na fakultetu, dok aktivno proširujem veštine i radim na realnim projektima.',
+            contact_btn: 'Kontaktiraj me',
+            projects_title: 'Moji projekti',
+            projects_sub: 'Projekti na kojima sam radio',
+            counter_projects: 'Projekata',
+            counter_years: 'Godina učenja',
+            counter_hours: 'Sati kodiranja',
+            card_title: 'Portfolio sajt',
+            card_desc: 'Lični portfolio sajt napravljen od nule. Responzivan dizajn, animacije, JavaScript interaktivnost.',
+            view_project: 'Pogledaj projekat',
+            contact_title: 'Kontakt',
+            contact_info: 'Informacije',
+            lokacija: '📍 Kragujevac, Srbija',
+            call_me: 'Pozovi me',
+            label_name: 'Vaše ime',
+            label_email: 'Vaš email',
+            label_msg: 'Vaša poruka',
+            send_btn: 'Pošalji poruku',
+            footer: '© 2026 Mihajlo Savović. Sva prava zadržana.',
+            toast: '✅ Poruka poslata!',
+        }
+    };
+
+    let currentLang = 'en';
+    const langToggle = document.getElementById('lang-toggle');
+
+    function applyLang(lang) {
+        const t = translations[lang];
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (t[key] !== undefined) {
+                el.innerHTML = t[key];
+            }
+        });
+        const flag = document.getElementById('lang-flag');
+        const flagDesktop = document.getElementById('lang-flag-desktop');
+        if (lang === 'sr') {
+            flag.src = 'https://flagcdn.com/w40/gb.png';
+            flag.alt = 'EN';
+            flagDesktop.src = 'https://flagcdn.com/w40/gb.png';
+            flagDesktop.alt = 'EN';
+        } else {
+            flag.src = 'https://flagcdn.com/w40/rs.png';
+            flag.alt = 'SR';
+            flagDesktop.src = 'https://flagcdn.com/w40/rs.png';
+            flagDesktop.alt = 'SR';
+        }
+        tekst = t.typewriter;
+        startTypewriter();
+    }
+
+    langToggle.addEventListener('click', function () {
+        currentLang = currentLang === 'en' ? 'sr' : 'en';
+        applyLang(currentLang);
+    });
+
+    document.getElementById('lang-toggle-desktop').addEventListener('click', function () {
+        currentLang = currentLang === 'en' ? 'sr' : 'en';
+        applyLang(currentLang);
+    });
+
+    scrollEl.addEventListener('scroll', function () {
+        if (scrollEl.scrollTop > 10) langToggle.classList.add('skriven');
+        else langToggle.classList.remove('skriven');
+    }, { passive: true });
+
     document.getElementById('kontakt-dugme').addEventListener('click', function () {
-        scrollEl.style.scrollBehavior = 'auto';
-        scrollEl.scrollTop = 0;
-        stranice.forEach(s => s.classList.remove('aktivna'));
-        document.getElementById('kontakt').classList.add('aktivna');
-        linkovi.forEach(l => l.classList.remove('aktivna'));
-        document.querySelector('nav a[href="#kontakt"]').classList.add('aktivna');
-        document.getElementById('o-meni').classList.add('bez-animacija');
-        setTimeout(() => { scrollEl.style.scrollBehavior = ''; }, 50);
+        const el = document.getElementById('kontakt');
+        scrollEl.scrollTo({ top: el.offsetTop - 20, behavior: 'smooth' });
     });
 
     document.querySelectorAll('.socijalne a').forEach(ikona => {
