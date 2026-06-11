@@ -316,15 +316,20 @@
         startTypewriter();
     }
 
-    langToggle.addEventListener('click', function () {
-        currentLang = currentLang === 'en' ? 'sr' : 'en';
-        applyLang(currentLang);
-    });
+    function promeniJezik() {
+        const preloader = document.getElementById('preloader');
+        preloader.style.display = 'flex';
+        preloader.style.opacity = '1';
+        setTimeout(() => {
+            currentLang = currentLang === 'en' ? 'sr' : 'en';
+            applyLang(currentLang);
+            preloader.style.opacity = '0';
+            setTimeout(() => preloader.style.display = 'none', 500);
+        }, 150);
+    }
 
-    document.getElementById('lang-toggle-desktop').addEventListener('click', function () {
-        currentLang = currentLang === 'en' ? 'sr' : 'en';
-        applyLang(currentLang);
-    });
+    langToggle.addEventListener('click', promeniJezik);
+    document.getElementById('lang-toggle-desktop').addEventListener('click', promeniJezik);
 
     scrollEl.addEventListener('scroll', function () {
         if (scrollEl.scrollTop > 10) langToggle.classList.add('skriven');
