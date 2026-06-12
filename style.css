@@ -646,11 +646,12 @@ button {
     width: 200px;
     height: 200px;
     object-fit: cover;
-    object-position: center top;
+    object-position: center center;
     border-radius: 50%;
     display: block;
     position: relative;
     z-index: 1;
+    filter: blur(0.2px);
 }
 
 
